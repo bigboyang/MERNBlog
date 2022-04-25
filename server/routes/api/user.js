@@ -15,7 +15,8 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   try {
     const users = await User.find();
-    if (!!users) throw Error("No Users");
+    if (users.length === 0) throw Error("No Users");
+
     res.status(200).json(users);
   } catch (error) {
     console.log(error);
@@ -41,16 +42,11 @@ router.post("/", async (req, res) => {
         return res.status(400).json({ msg: "이미 가입된 유저가 존재합니다" });
       }
     });
-
     const newUser = new User({
       name,
       email,
       password,
     });
-
-    console.log("hi1");
-
-    console.log("hi2");
 
     bcrypt.genSalt(10, (err, salt) => {
       // 2의10승
@@ -62,7 +58,7 @@ router.post("/", async (req, res) => {
           jwt.sign(
             { id: user.id },
             JWT_SECRET,
-            { expiresIn: 3600 },
+            { expiresIn: 360000 },
             (err, token) => {
               if (err) throw err;
               res.json({
