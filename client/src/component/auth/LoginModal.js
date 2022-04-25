@@ -48,7 +48,7 @@ const LoginModal = () => {
     e.preventDefault();
     const { email, password } = form;
     const user = { email, password };
-    console.log(user);
+    console.log(user, "loginModal");
     dispatch({
       type: LOGIN_REQUEST,
       payload: user,

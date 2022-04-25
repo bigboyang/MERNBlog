@@ -1,6 +1,13 @@
 import axios from "axios";
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from "../types";
+import {
+  LOGIN_FAILURE,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGOUT_FAILURE,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+} from "../types";
 
 // Login
 const loginUserAPI = (loginData) => {
@@ -10,7 +17,7 @@ const loginUserAPI = (loginData) => {
       "Content-Type": "application/json",
     },
   };
-  return axios.post("api/auth", loginData, config);
+  return axios.post("/api/auth", loginData, config);
 };
 
 function* loginUser(action) {
@@ -36,6 +43,25 @@ function* watchLoginUser() {
   yield takeEvery(LOGIN_REQUEST, loginUser);
 }
 
+// LOGOUT
+function* logout(action) {
+  console.log(action, "action in logout");
+  try {
+    yield put({
+      type: LOGOUT_SUCCESS,
+    });
+  } catch (error) {
+    yield put({
+      type: LOGOUT_FAILURE,
+    });
+    console.log(error, "error in logout");
+  }
+}
+
+function* watchLogoutUser() {
+  yield takeEvery(LOGOUT_REQUEST, logout);
+}
+
 export default function* authSaga() {
-  yield all([fork(watchLoginUser)]);
+  yield all([fork(watchLoginUser), fork(watchLogoutUser)]);
 }
