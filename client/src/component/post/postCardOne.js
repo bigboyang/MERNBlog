@@ -11,8 +11,10 @@ import {
 import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMouse } from "@fortawesome/free-solid-svg-icons";
+import { useHistory } from "react-router-dom";
 
 const PostCardOne = ({ posts }) => {
+  const history = useHistory();
   return (
     <>
       {Array.isArray(posts)
@@ -21,6 +23,10 @@ const PostCardOne = ({ posts }) => {
               <div key={_id} className="col-md-4">
                 <Link
                   to={`/post/${_id}`}
+                  onClick={() => {
+                    history.push("/post/" + _id);
+                    window.location.reload();
+                  }}
                   className="text-dark text-decoration-none"
                 >
                   <Card className="mb-3">
