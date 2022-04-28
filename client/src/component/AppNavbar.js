@@ -38,7 +38,9 @@ const AppNavbar = () => {
     setIsOpen(!isOpen);
   };
 
-  const addPostClick = () => {};
+  const addPostClick = () => {
+    window.location.reload();
+  };
 
   const authLink = (
     <Fragment>
