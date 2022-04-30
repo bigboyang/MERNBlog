@@ -1,7 +1,8 @@
-import dotenv from "dotenv";
-dotenv.config();
+// import dotenv from "dotenv";
+// dotenv.config();
 export default {
-  MONGO_URI: process.env.MONGO_URI,
-  JWT_SECRET: process.env.JWT_SECRET,
-  PORT: process.env.PORT,
+  MONGO_URI:
+    "mongodb+srv://jaykos96:wortms965@blog.lwrnv.mongodb.net/blog?retryWrites=true&w=majority",
+  JWT_SECRET: "SSaple",
+  PORT: "7000",
 };
