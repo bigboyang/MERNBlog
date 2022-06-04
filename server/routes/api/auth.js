@@ -63,7 +63,7 @@ router.get("/user", auth, async (req, res) => {
     if (!user) throw Error("유저가 없습니다");
     res.json(user);
   } catch (error) {
-    console.log(error);
+    console.log("토큰받아 유저 가져오는 " + error);
     res.status(400).json({ msg: error.message });
   }
 });

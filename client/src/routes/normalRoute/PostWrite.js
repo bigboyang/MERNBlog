@@ -11,9 +11,11 @@ import {
   Progress,
   Col,
 } from "reactstrap";
+import { POST_UPLOADING_REQUEST } from "../../redux/types";
 
 const PostWrite = () => {
   // const { isAutenticated } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const isAutenticated = true;
   const [form, setValues] = useState({ title: "", contents: "" });
 
@@ -28,7 +30,7 @@ const PostWrite = () => {
       let whereImg_end = "";
       let ext_name_find = "";
       let result_img_url = "";
-      const ext_name = ["jpeg", "png", "jpg", "gif"];
+      const ext_name = ["jpeg", "png", "jpg", "gif", "PNG", "JPG"];
 
       for (let i = 0; i < ext_name.length; i++) {
         if (value.match(ext_name[i])) {
@@ -63,6 +65,17 @@ const PostWrite = () => {
 
   console.log(form.contents, "form");
 
+  const onSubmit = async (e) => {
+    await e.preventDefault();
+    const { title, contents, fileUrl, category } = form;
+    const token = localStorage.getItem("token");
+    const body = { title, contents, fileUrl, category, token };
+    dispatch({
+      type: POST_UPLOADING_REQUEST,
+      payload: body,
+    });
+  };
+
   const onChange = (e) => {
     setValues({
       ...form,
@@ -74,7 +87,7 @@ const PostWrite = () => {
     <>
       <h1>PostWrite</h1>
       {isAutenticated ? (
-        <Form>
+        <Form onSubmit={onSubmit}>
           {/* 타이틀 */}
           <FormGroup className="mb-3">
             <Label for="title">TITLE</Label>

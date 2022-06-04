@@ -41,6 +41,7 @@ const authReducer = (state = initialState, action) => {
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       localStorage.setItem("token", action.payload.token);
+      console.log("토큰저장 성공", localStorage.getItem("token"));
       return {
         ...state,
         ...action.payload,

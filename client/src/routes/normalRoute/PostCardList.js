@@ -11,7 +11,6 @@ const PostCardList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("발생");
     dispatch({ type: POST_LOADING_REQUEST });
   }, []);
 

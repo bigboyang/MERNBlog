@@ -107,10 +107,7 @@ const AppNavbar = () => {
           <NavbarToggler onClick={handleToggle} />
           <Collapse isOpen={isOpen} navbar>
             {/* d-flex justify-content-between */}
-            <Nav
-              className="ml-auto d-flex d-inline-flex justify-content-around"
-              navbar
-            >
+            <Nav className="ml-auto d-felx justify-content-around" navbar>
               {isAuthenticated ? (
                 <h1 className="text-white">{authLink}</h1>
               ) : (
